@@ -1,0 +1,37 @@
+<script type="text/javascript">
+(function(){
+	var lnkTestGoogleLogin, txtResult;
+
+	$(function(){
+		lnkTestGoogleLogin = $('#lnkTestGoogleLogin');
+		txtResult = $('#txtResult');
+		
+		lnkTestGoogleLogin.click(function(event){
+			$.ajax({
+				'url': '/webservices/login/logingoogle',
+				'dataType': 'json',
+				'success': function(data) {
+					if (data.status === 'success') {
+						txtResult.text('Token: ' + data.token);					
+					} else {
+						txtResult.text('Error: ' + data.message);
+					}
+				},
+				'error': function(data) {
+					txtResult.text('Error contacting server');				
+				}
+			});
+
+			return false;
+		});
+
+	});
+})();				
+</script>
+<dir>
+	<a href="#" id="lnkTestGoogleLogin">Test Google Login</a>
+</dir>
+
+<div>
+	<span id="txtResult"></span>
+</div>
